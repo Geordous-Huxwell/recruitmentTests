@@ -86,23 +86,6 @@ const lyrics = {
 // REFACTOR THIS CODE //
 // This code assembles the above object into a string with the lyrics for Eminem's "lose Yourself". 
 // // The result should look like https://www.google.ca/search?rlz=1C5CHFA_enCA764CA764&ei=4iFbWs_VG43CjwOJ465Q&q=lose+yourself+lyrics&oq=lose+yoursle&gs_l=psy-ab.3.0.0i10k1l10.6780.11717.0.12640.28.24.0.2.2.0.275.2686.4j13j2.20.0....0...1c.1.64.psy-ab..15.12.1403.0..0j0i67k1j0i131k1j0i131i67k1.234.XSGvMUvV4XY
-// const lyrics = {
-//     intro: "intro\
-//     ",
-//     choruses: [{
-//             chorus: "chorus0"
-//         },
-//         {
-//             chorus: "chorus1"
-//         },
-//         {
-//             chorus: "chorus2"
-//         }
-//     ],
-//     refrain: "refrain",
-//     refrainRepeat: 2, // number of times that refrain get repeated between choruses
-//     ending: "ending"
-// }
 
 function momsSpagetti(lyrics) {
 
