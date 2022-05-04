@@ -5,7 +5,7 @@
 
 // DO NOT REFACTOR THIS SECTION //
 const lyrics = {
-    intro: "Look\
+        intro: "Look\
     If you had\
     One shot\
     Or one opportunity\
@@ -13,8 +13,8 @@ const lyrics = {
     In one moment\
     Would you capture\
     Or just let it slip?",
-    choruses: [{
-        chorus: "Yo\
+        choruses: [{
+                chorus: "Yo\
         His palms are sweaty, knees weak, arms are heavy\
         There's vomit on his sweater already, mom's spaghetti\
         He's nervous, but on the surface he looks calm and ready\
@@ -31,9 +31,9 @@ const lyrics = {
         He's so stacked that he knows, when he goes back to his mobile home, that's when its\
         Back to the lab again yo, this whole rhapsody\
         He better go capture this moment and hope it don't pass him"
-    },
-    {
-        chorus: "The souls escaping, through this hole that its gaping\
+            },
+            {
+                chorus: "The souls escaping, through this hole that its gaping\
         This world is mine for the taking\
         Make me king, as we move toward a, new world order\
         A normal life is borin', but super stardom's close to post mortem\
@@ -47,9 +47,9 @@ const lyrics = {
         They moved on to the next schmo who flows, he nose dove and sold nada\
         So the soap opera is told and unfolds, I suppose it's old partna, but the beat goes on\
         Da da dumb da dumb da da"
-    },
-    {
-        chorus: "No more games, I'm a change what you call rage\
+            },
+            {
+                chorus: "No more games, I'm a change what you call rage\
         Tear this roof off like two dogs caged\
         I was playin' in the beginnin', the mood all changed\
         I been chewed up and spit out and booed off stage\
@@ -71,37 +71,56 @@ const lyrics = {
         Mom, I love you, but this trail has got to go, I cannot grow old in Salem's lot\
         So here I go is my shot\
         Feet fail me not 'cause maybe the only opportunity that I got"
-    }],
-    refrain:"You better lose yourself in the music, the moment \
+            }
+        ],
+        refrain: "You better lose yourself in the music, the moment \
     You own it, you better never let it go \
     You only get one shot, do not miss your chance to blow \
     This opportunity comes once in a lifetime you better",
-    refrainRepeat: 2, // number of times that refrain get repeated between choruses
-    ending: "You can do anything you set your mind to, man"
-}
-// DO NOT REFACTOR THIS SECTION //
+        refrainRepeat: 2, // number of times that refrain get repeated between choruses
+        ending: "You can do anything you set your mind to, man"
+    }
+    // DO NOT REFACTOR THIS SECTION //
 
 
 // REFACTOR THIS CODE //
 // This code assembles the above object into a string with the lyrics for Eminem's "lose Yourself". 
-// The result should look like https://www.google.ca/search?rlz=1C5CHFA_enCA764CA764&ei=4iFbWs_VG43CjwOJ465Q&q=lose+yourself+lyrics&oq=lose+yoursle&gs_l=psy-ab.3.0.0i10k1l10.6780.11717.0.12640.28.24.0.2.2.0.275.2686.4j13j2.20.0....0...1c.1.64.psy-ab..15.12.1403.0..0j0i67k1j0i131k1j0i131i67k1.234.XSGvMUvV4XY
+// // The result should look like https://www.google.ca/search?rlz=1C5CHFA_enCA764CA764&ei=4iFbWs_VG43CjwOJ465Q&q=lose+yourself+lyrics&oq=lose+yoursle&gs_l=psy-ab.3.0.0i10k1l10.6780.11717.0.12640.28.24.0.2.2.0.275.2686.4j13j2.20.0....0...1c.1.64.psy-ab..15.12.1403.0..0j0i67k1j0i131k1j0i131i67k1.234.XSGvMUvV4XY
+// const lyrics = {
+//     intro: "intro\
+//     ",
+//     choruses: [{
+//             chorus: "chorus0"
+//         },
+//         {
+//             chorus: "chorus1"
+//         },
+//         {
+//             chorus: "chorus2"
+//         }
+//     ],
+//     refrain: "refrain",
+//     refrainRepeat: 2, // number of times that refrain get repeated between choruses
+//     ending: "ending"
+// }
+
 function momsSpagetti(lyrics) {
 
     var loseYourself;
     var internalCounter = 0
     loseYourself = lyrics.intro;
 
-    for(i = 0; i < lyrics.choruses.length; i++) {
+    for (i = 0; i < lyrics.choruses.length; i++) {
         loseYourself = loseYourself + lyrics.choruses[i].chorus;
-        if(internalCounter == 0) {
+        if (internalCounter == 0) {
             internalCounter++
             loseYourself = loseYourself + lyrics.refrain
         }
-        if(internalCounter == 1) {
+        if (internalCounter == 1) {
             internalCounter++
             loseYourself = loseYourself + lyrics.refrain
         }
-        if(internalCounter == 2) {
+        if (internalCounter == 2) {
             internalCounter = 0
         }
     }
@@ -112,3 +131,72 @@ function momsSpagetti(lyrics) {
 }
 
 // REFACTORED VERSION HERE //
+/**
+ * Reads a JSON array to compile a string in the correct order that the song lyrics occur in  
+ * @param {string} song 
+ * @param {number} chorusCounter 
+ * @returns {string} compiled song
+ */
+function momsSpaghettiTokyoDrift(song, chorusCounter) {
+
+    if (chorusCounter == 0) {
+        // includes newline insertion where appropriate as per google lyrics formatting
+        song += lyrics.intro.replaceAll(" ".repeat(4), "\n") + "\n\n";
+        song += lyrics.choruses[chorusCounter].chorus.replaceAll(" ".repeat(8), " \n") + '\n\n';
+        chorusCounter++;
+        song = addRefrain(song) + '\n';
+
+        return momsSpaghettiTokyoDrift(song, chorusCounter);
+
+    } else if (chorusCounter == 1) {
+        song += lyrics.choruses[chorusCounter].chorus.replaceAll(" ".repeat(8), "\n") + '\n\n';
+        chorusCounter++;
+        song = addRefrain(song) + '\n';
+
+        return momsSpaghettiTokyoDrift(song, chorusCounter);
+
+    } else {
+        song += lyrics.choruses[chorusCounter].chorus.replaceAll(" ".repeat(8), "\n") + '\n\n';
+        song = addRefrain(song) + '\n';
+        song += lyrics.ending;
+    }
+    return song;
+}
+
+/**
+ * handles the refrain repetition
+ * @param {string} song 
+ * @returns {string} compiled refrain string
+ */
+function addRefrain(song) {
+    for (var i = 0; i < lyrics.refrainRepeat; i++) {
+        var refrain;
+        /*manages the fact that only the second instance of each 
+        refrain ends with "You better" as per the google lyrics link*/
+        if (i == 0) {
+            refrain = replaceNth(lyrics.refrain, 2, "you better", "\n");
+        } else {
+            refrain = replaceNth(lyrics.refrain, 2, "you better", "\nYou better");
+        }
+        //convert spaces to newline
+        refrain = refrain.replaceAll(" ".repeat(5), "\n") + '\n';
+        song += refrain;
+    }
+    return song;
+}
+
+/**
+ * replaces the nth occurrence of a substring in a string
+ * @param {string} str 
+ * @param {number} n 
+ * @param {string} find 
+ * @param {string} replaceWith 
+ * @returns {string} new string
+ */
+function replaceNth(str, n, find, replaceWith) {
+    var found = str.split(find);
+    return found.slice(0, n).join(find) + replaceWith + found.slice(n).join(find);
+}
+
+
+console.log(momsSpaghettiTokyoDrift("", 0));
